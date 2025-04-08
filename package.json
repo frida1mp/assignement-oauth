@@ -1,0 +1,54 @@
+{
+  "name": "example-just-task-it-featuring-webhook-and-websocket",
+  "version": "3.5.0",
+  "description": "1DV026 - Example - Just Task It feat. Webhook and WebSocket",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon --inspect --env-file=.env src/server.js",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0",
+    "deploy": "firebase deploy --only functions:api"
+  },
+  "contributors": [
+    "Frida Pedersén <fp222ni@student.lnu.se>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@lnu/json-js-cycle": "^2.0.5",
+    "axios": "^1.8.4",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-http-context": "^1.2.4",
+    "express-session": "^1.17.3",
+    "firebase-functions": "^4.0.0",
+    "helmet": "^8.1.0",
+    "mongoose": "^8.0.0",
+    "morgan": "^1.10.0",
+    "socket.io": "^4.7.5",
+    "winston": "^3.11.0",
+    "winston-mongodb": "^5.1.1",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.10",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsdoc": "^46.10.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.1"
+  },
+  "eslintConfig": {
+    "extends": "@lnu"
+  }
+}

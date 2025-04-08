@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Profile</h1>
+<table>
+  <thead>
+    <tr>
+      <th>GitLab ID</th>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Avatar</th>
+      <th>Last Activity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= session.user.id %></td>
+      <td><%= session.user.email %></td>
+      <td><%= session.user.name %></td>
+      <td><%= session.user.username %></td>
+      <td>
+        <div class="avatar">
+          <img src="<%= session.user.avatarUrl %>" alt="User Avatar">
+        </div>
+      </td>
+      <td><%= session.user.lastActivity || 'No activity recorded' %></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Code licensed <a href="#">MIT</a>.</p>
+
+</body>
+</html>

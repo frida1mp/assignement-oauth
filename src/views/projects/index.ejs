@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groups with Projects</title>
+    <style>
+        .group-container {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .group-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .project-container {
+            padding: 8px;
+            background-color: #f4f4f4;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        .project-title {
+            font-weight: bold;
+        }
+
+        .last-commit {
+            color: gray;
+            font-style: italic;
+        }
+
+        .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .no-projects {
+            color: gray;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Groups with Projects</h1>
+
+    <% if (Projects && Projects.length) { %>
+        <% Projects.forEach(group => { %>
+            <div class="group-container">
+                <a class="group-title" href="https://gitlab.lnu.se/<%= group.groupPath %>">
+                    <%= group.groupName || 'Group ID: ' + group.groupId %>
+                </a>
+                <p>
+                    <%= group.groupPath || 'No path available' %>
+                </p>
+
+                <% if (group.projects && group.projects.length) { %>
+                    <% group.projects.slice(0, 5).forEach(project => { %>
+                        <div class="project-container">
+                            <p class="project-title">
+                                <a href="<%= project.web_url %>">
+                                    <%= project.name %>
+                                </a>
+                            </p>
+                            <% if (project.avatar_url) { %>
+                                <div class="avatar">
+                                    <img src="<%= project.avatar_url %>" alt="Project Avatar" onerror="this.style.display='none';">
+                                </div>
+                            <% } %>
+                            <p>
+                                <%= project.path_with_namespace || 'No namespace available' %>
+                            </p>
+                            <div class="last-commit">
+                                Last commit: <%= project.last_commit && project.last_commit.committed_date ? new Date(project.last_commit.committed_date).toLocaleDateString() : 'No commits yet' %>
+                                by <%= project.last_commit && project.last_commit.author_name ? project.last_commit.author_name : 'Unknown author' %>
+                            </div>
+                            <% if (project.last_commit && project.last_commit.avatar_url) { %>
+                                <div class="avatar">
+                                    <img src="<%= project.last_commit.avatar_url %>" alt="User Avatar" onerror="this.style.display='none';">
+                                </div>
+                            <% } else { %>
+                                <div class="avatar">
+                                    <p>No avatar available</p>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% }); %>
+                    <% if (group.projects.length > 5) { %>
+                        <button>View more projects (not implemented yet)</button>
+                    <% } %>
+                <% } else { %>
+                    <p class="no-projects">There are no projects to display</p>
+                <% } %>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>No groups found.</p>
+    <% } %>
+
+    <p>Code licensed <a href="#">MIT</a>.</p>
+
+</body>
+
+</html>

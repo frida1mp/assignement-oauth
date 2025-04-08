@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Activities</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Action Name</th>
+      <th>Created At</th>
+      <th>Project ID</th>
+      <th>Target Title</th>
+      <th>Target Type</th>
+      <th>Author Username</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (activities && activities.length) { %>
+      <% activities.slice(0, 101).forEach(activity => { %>
+        <tr>
+          <td><%= activity.action_name %></td>
+          <td><%= new Date(activity.created_at).toLocaleString() %></td>
+          <td><%= activity.project_id || 'N/A' %></td>
+          <td><%= activity.target_title || 'N/A' %></td>
+          <td><%= activity.target_type || 'N/A' %></td>
+          <td><%= activity.author_username || 'N/A' %></td>
+        </tr>
+      <% }); %>
+    <% } else { %>
+      <tr>
+        <td colspan="6" class="text-center text-danger">
+          No activities found.
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<p>Code licensed <a href="#">MIT</a>.</p>
+
+</body>
+</html>
